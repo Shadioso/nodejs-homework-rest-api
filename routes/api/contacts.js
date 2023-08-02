@@ -1,20 +1,27 @@
 const express = require("express");
 const router = express.Router();
-const ctrl = require(`../../controlers/contacts`);
-const { isValidId } = require(`../../helpers`);
+const { contacts } = require(`../../controlers`);
+const { isValidId, authenticate } = require(`../../helpers`);
 // //
-router.get("/", ctrl.listContacts);
+router.get("/", authenticate, contacts.listContacts);
 // //
-router.get("/:contactId", isValidId, ctrl.getContactById);
+router.get("/:contactId", authenticate, isValidId, contacts.getContactById);
 // //
-router.post("/", ctrl.addContact);
+router.post("/", authenticate, contacts.addContact);
 // //
-router.delete("/:contactId", isValidId, ctrl.removeContact);
+router.delete("/:contactId", authenticate, isValidId, contacts.removeContact);
 // //
-router.put("/:contactId", isValidId, ctrl.updateContact);
+router.put("/:contactId", authenticate, isValidId, contacts.updateContact);
 //
-router.patch("/:contactId/favorite ", isValidId, ctrl.updateStatusContact);
+router.patch(
+  "/:contactId/favorite ",
+  authenticate,
+  isValidId,
+  contacts.updateStatusContact
+);
 
 // //
 
 module.exports = router;
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2E0M2E4ZTdhMTI0MzIwNmVhMjk4ZiIsImlhdCI6MTY5MDk3NzM0NywiZXhwIjoxNjkxMDYwMTQ3fQ.03pgP0xPHti9_7Xz58s9HZ0scICM9T3XxBUcfmpbP2Q

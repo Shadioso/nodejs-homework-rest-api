@@ -1,5 +1,5 @@
 const httpError = (status, message) => {
-  const Error = new Error(message);
+  const error = new Error(message);
   error.status = status;
   return error;
 };

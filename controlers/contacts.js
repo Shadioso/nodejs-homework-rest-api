@@ -1,21 +1,11 @@
 const Contact = require(`../models/contact`);
 const { httpError } = require(`../helpers`);
-
-const Joi = require(`joi`);
-const addSchema = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().required(),
-  phone: Joi.string().required(),
-});
-//
-const updateFavoriteSchema = Joi.object({
-  favorite: Joi.boolean().required(),
-});
+const { addSchema, updateFavoriteSchema } = require(`../helpers/joiContacts`);
 
 const listContacts = async (req, res, next) => {
   try {
-    const result = await Contact.find();
-
+    const { _id: owner } = req.user;
+    const result = await Contact.find({ owner });
     if (!result) {
       throw httpError(404, `Not found`);
     }
@@ -42,10 +32,12 @@ const getContactById = async (req, res, next) => {
 const addContact = async (req, res, next) => {
   try {
     const { error } = addSchema.validate(req.body);
+    console.log(error);
     if (error) {
       throw httpError(400, error.message);
     }
-    const result = await Contact.create(req.body);
+    const { _id: owner } = req.user;
+    const result = await Contact.create({ ...req.body, owner });
     if (!result) {
       throw httpError(404, `Not found`);
     }
