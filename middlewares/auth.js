@@ -1,5 +1,5 @@
 const jwt = require(`jsonwebtoken`);
-const httpError = require(`./httpError`);
+const httpError = require(`../helpers/httpError`);
 const { SECRET_KEY } = require(`../config`);
 const User = require(`../models/users`);
 
@@ -17,7 +17,7 @@ const authenticate = async (req, res, next) => {
     req.user = user;
     next();
   } catch {
-    next(httpError(401, "Email or password is wrong(catch)"));
+    next(httpError(401, "Email or password is wrong"));
   }
 };
 

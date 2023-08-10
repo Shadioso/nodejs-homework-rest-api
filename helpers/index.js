@@ -1,6 +1,6 @@
 const httpError = require(`./httpError`);
 const isValidId = require(`./isValidId`);
-const authenticate = require(`./auth`);
+const authenticate = require(`../middlewares/auth`);
 module.exports = {
   httpError,
   isValidId,
