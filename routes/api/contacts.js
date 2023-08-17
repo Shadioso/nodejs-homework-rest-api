@@ -20,8 +20,6 @@ router.patch(
   contacts.updateStatusContact
 );
 
-// //
+//
 
 module.exports = router;
-
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2E0M2E4ZTdhMTI0MzIwNmVhMjk4ZiIsImlhdCI6MTY5MDk3NzM0NywiZXhwIjoxNjkxMDYwMTQ3fQ.03pgP0xPHti9_7Xz58s9HZ0scICM9T3XxBUcfmpbP2Q

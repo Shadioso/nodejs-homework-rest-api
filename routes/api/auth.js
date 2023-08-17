@@ -6,6 +6,10 @@ const upload = require(`../../middlewares/avatar`);
 //
 router.post("/register", auth.register);
 //
+router.get("/verify/:verificationToken", auth.verify);
+//
+router.post("/verify", auth.resendVerifyEmail);
+//
 router.post("/login", auth.login);
 //
 router.get("/current", authenticate, auth.getCurrent);
@@ -22,4 +26,3 @@ router.patch(
 module.exports = router;
 
 //
-// "probe@gmail.com"
