@@ -1,25 +1,25 @@
-const express = require('express')
+const express = require("express");
+const router = express.Router();
+const { contacts } = require(`../../controlers`);
+const { isValidId, authenticate } = require(`../../helpers`);
+// //
+router.get("/", authenticate, contacts.listContacts);
+// //
+router.get("/:contactId", authenticate, isValidId, contacts.getContactById);
+// //
+router.post("/", authenticate, contacts.addContact);
+// //
+router.delete("/:contactId", authenticate, isValidId, contacts.removeContact);
+// //
+router.put("/:contactId", authenticate, isValidId, contacts.updateContact);
+//
+router.patch(
+  "/:contactId/favorite ",
+  authenticate,
+  isValidId,
+  contacts.updateStatusContact
+);
 
-const router = express.Router()
+//
 
-router.get('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
-
-router.get('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
-
-router.post('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
-
-router.delete('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
-
-router.put('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
-
-module.exports = router
+module.exports = router;
